@@ -28,7 +28,7 @@ const Home = () => {
       <ProductCard key={product.model} product={product} />
     ));
   }
-  console.log(content,"=======================");
+  // console.log(content,"=======================");
 
   // if (products.length && (stock || brands.length)) {
   //   content = products
