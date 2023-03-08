@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
-import { toggleBrand, toggleStock } from "../../redux/actions/filterActions";
+import { toggle, toggleBrands } from "../../feature/filter/filterSlice";
 import loadProductData from "../../redux/thunk/products/fetchProducts";
 
 const Home = () => {
   // const filters = useSelector((state) => state.filter.filters);
   // const products = useSelector((state) => state.product.products);
-  // const { brands, stock } = filters;
+  
+  const filters  = useSelector(state =>state.filter)
+  const { brands, stock } = filters;
+
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
 
@@ -30,40 +33,40 @@ const Home = () => {
   }
   // console.log(content,"=======================");
 
-  // if (products.length && (stock || brands.length)) {
-  //   content = products
-  //     ?.filter((product) => {
-  //       if (stock) {
-  //         return product.status === true;
-  //       }
-  //       return product;
-  //     })
-  //     ?.filter((product) => {
-  //       if (brands.length) {
-  //         return brands.includes(product.brand);
-  //       }
-  //       return product;
-  //     })
-  //     ?.map((product) => <ProductCard key={product.model} product={product} />);
-  // }
+  if (products.length && (stock || brands.length)) {
+    content = products
+      ?.filter((product) => {
+        if (stock) {
+          return product.status === true;
+        }
+        return product;
+      })
+      ?.filter((product) => {
+        if (brands.length) {
+          return brands.includes(product.brand);
+        }
+        return product;
+      })
+      ?.map((product) => <ProductCard key={product.model} product={product} />);
+  }
 
   return (
     <div className="max-w-7xl gap-14 mx-auto my-10">
       <div className="mb-10 flex justify-end gap-5">
         <button
-          onClick={() => dispatch(toggleStock())}
+          onClick={() => dispatch(toggle())}
           className={`border px-3 py-2 rounded-full font-semibold  `}
         >
           In Stock
         </button>
         <button
-          onClick={() => dispatch(toggleBrand("amd"))}
+          onClick={() => dispatch(toggleBrands("amd"))}
           className={`border px-3 py-2 rounded-full font-semibold `}
         >
           AMD
         </button>
         <button
-          onClick={() => dispatch(toggleBrand("intel"))}
+          onClick={() => dispatch(toggleBrands("intel"))}
           className={`border px-3 py-2 rounded-full font-semibold }`}
         >
           Intel
