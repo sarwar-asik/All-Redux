@@ -55,19 +55,19 @@ const Home = () => {
       <div className="mb-10 flex justify-end gap-5">
         <button
           onClick={() => dispatch(toggle())}
-          className={`border px-3 py-2 rounded-full font-semibold  `}
+          className={`${stock?activeClass:null} border px-3 py-2 rounded-full font-semibold `}
         >
           In Stock
         </button>
         <button
           onClick={() => dispatch(toggleBrands("amd"))}
-          className={`border px-3 py-2 rounded-full font-semibold `}
+          className={`  ${brands.includes("amd")?activeClass:null} border px-3 py-2 rounded-full font-semibold `}
         >
           AMD
         </button>
         <button
           onClick={() => dispatch(toggleBrands("intel"))}
-          className={`border px-3 py-2 rounded-full font-semibold }`}
+          className={` ${brands.includes("intel")?activeClass:null} border px-3 py-2 rounded-full font-semibold }`}
         >
           Intel
         </button>
