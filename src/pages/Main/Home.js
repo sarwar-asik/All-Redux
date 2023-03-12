@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
 import { toggle, toggleBrands } from "../../feature/filter/filterSlice";
-import loadProductData from "../../redux/thunk/products/fetchProducts";
+import { getProducts } from "../../feature/products/productSlice";
 
 const Home = () => {
   // const filters = useSelector((state) => state.filter.filters);
   // const products = useSelector((state) => state.product.products);
-  
-  const filters  = useSelector(state =>state.filter)
+
+  const filters = useSelector((state) => state.filter);
+  const { products } = useSelector((state) => state.products);
   const { brands, stock } = filters;
-
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
-
+  // const [products, setProducts] = useState([]);
+  console.log(products, "fromReducer", getProducts);
   useEffect(() => {
     // dispatch(loadProductData());
-
-    fetch(`http://localhost:5000/products`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.data));
-  }, []);
+    dispatch(getProducts());
+    // fetch(`http://localhost:5000/products`)
+    //   .then((res) => res.json())
+    //   .then((data) => setProducts(data.data));
+  }, [dispatch]);
 
   const activeClass = "text-white bg-indigo-500 border-white";
 
@@ -55,19 +55,25 @@ const Home = () => {
       <div className="mb-10 flex justify-end gap-5">
         <button
           onClick={() => dispatch(toggle())}
-          className={`${stock?activeClass:null} border px-3 py-2 rounded-full font-semibold `}
+          className={`${
+            stock ? activeClass : null
+          } border px-3 py-2 rounded-full font-semibold `}
         >
           In Stock
         </button>
         <button
           onClick={() => dispatch(toggleBrands("amd"))}
-          className={`  ${brands.includes("amd")?activeClass:null} border px-3 py-2 rounded-full font-semibold `}
+          className={`  ${
+            brands.includes("amd") ? activeClass : null
+          } border px-3 py-2 rounded-full font-semibold `}
         >
           AMD
         </button>
         <button
           onClick={() => dispatch(toggleBrands("intel"))}
-          className={` ${brands.includes("intel")?activeClass:null} border px-3 py-2 rounded-full font-semibold }`}
+          className={` ${
+            brands.includes("intel") ? activeClass : null
+          } border px-3 py-2 rounded-full font-semibold }`}
         >
           Intel
         </button>
