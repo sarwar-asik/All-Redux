@@ -13,7 +13,7 @@ const Home = () => {
   const { brands, stock } = filters;
   const dispatch = useDispatch();
   // const [products, setProducts] = useState([]);
-  console.log(products, "fromReducer", getProducts);
+  // console.log(products, "fromReducer", getProducts);
   useEffect(() => {
     // dispatch(loadProductData());
     dispatch(getProducts());
