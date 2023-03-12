@@ -40,7 +40,7 @@ const routes = createBrowserRouter([
         element: <ProductList />,
       },
       {
-        path: "add-product",
+        path: "/dashboard/add-product",
         element: <AddProduct />,
       },
     ],
