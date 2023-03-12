@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addProduct } from "../../feature/products/productSlice";
+import { addProduct, togglePostSuccess } from "../../feature/products/productSlice";
 
 const AddProduct = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit ,reset} = useForm();
   const { isLoading, postSuccess, error, isError } = useSelector(
     (state) => state.products
   );
@@ -20,12 +20,14 @@ const AddProduct = () => {
     }
     if (!isLoading && postSuccess) {
       toast.success("Products Added", { id: "addProduct" });
-      navigate(-1)
+      dispatch(togglePostSuccess())
+      // navigate(-1)
+      reset()
     }
     if (!isLoading && isError) {
       toast.error(error, { id: "addProduct" });
     }
-  }, [isLoading,postSuccess,isError,error,navigate])
+  }, [isLoading,postSuccess,isError,error,reset,dispatch])
 
 
   const submit = (data) => {
@@ -93,7 +95,6 @@ const AddProduct = () => {
             {...register("rating")}
           />
         </div>
-
         <div className="flex flex-col w-full max-w-xs">
           <h1 className="mb-3">Availability</h1>
           <div className="flex gap-3">

@@ -9,3 +9,7 @@ export const fetchProducts = async () => {
 export const postProducts = async (productData) => {
   await axios.post("/product",productData)
 }
+
+export const deleteProducts = async (id) => {
+  await axios.delete(`/product/${id}`,id)
+}
