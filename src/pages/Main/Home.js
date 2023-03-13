@@ -24,8 +24,9 @@ const Home = () => {
 
   const activeClass = "text-white bg-indigo-500 border-white";
 
-  let content;
 
+  
+  let content;
   if (products.length) {
     content = products?.map((product) => (
       <ProductCard key={product.model} product={product} />
