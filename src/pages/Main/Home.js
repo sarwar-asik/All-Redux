@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
+import { useGetProductsQuery } from "../../feature/api/apiSlice";
 import { toggle, toggleBrands } from "../../feature/filter/filterSlice";
 import { getProducts } from "../../feature/products/productSlice";
 
@@ -12,19 +13,22 @@ const Home = () => {
   // const { products } = useSelector((state) => state.products);
   // const { brands, stock } = filters;
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   // console.log(products, "fromReducer", getProducts)
-  useEffect(() => {
-    // dispatch(loadProductData());
-    // dispatch(getProducts());
-    fetch(`http://localhost:5000/products`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.data));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // dispatch(loadProductData());
+  //   // dispatch(getProducts());
+  //   fetch(`http://localhost:5000/products`)
+  //     .then((res) => res.json())
+  //     .then((data) => setProducts(data.data));
+  // }, [dispatch]);
 
+  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery();
+  const products = data?.data;
   const activeClass = "text-white bg-indigo-500 border-white";
-
-
+  if (isLoading) {
+    return <p className="font-bold ">Loading......</p>;
+  }
 
   let content;
   if (products.length) {
