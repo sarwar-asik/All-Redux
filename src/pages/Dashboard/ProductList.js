@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetProductsQuery } from "../../feature/api/apiSlice";
+import {
+  useGetProductsQuery,
+  useDeleteProductMutation,
+} from "../../feature/api/apiSlice";
 import {
   getProducts,
-  removeProduct,
+  // removeProduct,
 } from "../../feature/products/productSlice";
 // import deleteProduct from "../../redux/thunk/products/deleteProduct";
 
@@ -13,10 +16,11 @@ const ProductList = () => {
   //   (state) => state.products
   // );
   const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery();
-  const products =data?.data
+  const products = data?.data;
+  const [removeProduct] = useDeleteProductMutation();
 
   const dispatch = useDispatch();
-const [refresh,setRefresh] =useState("")
+  const [refresh, setRefresh] = useState("");
   // useEffect(() => {
   //   dispatch(getProducts());
   // },[dispatch]);
@@ -26,10 +30,10 @@ const [refresh,setRefresh] =useState("")
     // fetch(`http://localhost:5000/products`)
     //   .then((res) => res.json())
     //   .then((data) => setProducts(data.data));
-  }, [dispatch,refresh]);
+  }, [dispatch, refresh]);
 
   // useEffect(() => {
-  //   if (!isLoading 
+  //   if (!isLoading
   //     // && deleteSuccess
   //      ) {
   //     toast.success("Successfully Delete",{id:"deletedProduct"});
@@ -99,7 +103,7 @@ const [refresh,setRefresh] =useState("")
                   </td>
                   <td class="p-2">
                     <div class="flex justify-center">
-                      <button onClick={() => dispatch(removeProduct(_id))}>
+                      <button onClick={() => removeProduct(_id)}>
                         <svg
                           class="w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1"
                           fill="none"

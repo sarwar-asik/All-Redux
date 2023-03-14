@@ -16,7 +16,8 @@ const AddProduct = () => {
   // );
   // console.log(isLoading, postSuccess);
 
-  const [postProduct, {isLoading,isError,isSuccess,error}] = useAddProductMutation();
+  const [postProduct, { isLoading, isError, isSuccess, error }] =
+    useAddProductMutation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,18 +26,19 @@ const AddProduct = () => {
     if (isLoading) {
       toast.loading("Posting ......", { id: "addProduct" });
     }
-    if (!isLoading
+    if (
+      !isLoading
       //  && postSuccess
-       ) {
+    ) {
       toast.success("Products Added", { id: "addProduct" });
-      dispatch(togglePostSuccess())
+      dispatch(togglePostSuccess());
       // navigate(-1)
-      reset()
+      reset();
     }
     if (!isLoading && isError) {
       toast.error(error, { id: "addProduct" });
     }
-  }, [isLoading,isError,error,reset,dispatch])
+  }, [isLoading, isError, error, reset, dispatch]);
 
   const submit = (data) => {
     const product = {
@@ -58,7 +60,7 @@ const AddProduct = () => {
     // console.log(product);
     // dispatch(addProduct(product));
 
-    postProduct(product)
+    postProduct(product);
   };
 
   return (
