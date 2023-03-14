@@ -3,32 +3,40 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addProduct, togglePostSuccess } from "../../feature/products/productSlice";
+import { useAddProductMutation } from "../../feature/api/apiSlice";
+import {
+  addProduct,
+  togglePostSuccess,
+} from "../../feature/products/productSlice";
 
 const AddProduct = () => {
-  const { register, handleSubmit ,reset} = useForm();
+  const { register, handleSubmit, reset } = useForm();
   // const { isLoading, postSuccess, error, isError } = useSelector(
   //   (state) => state.products
   // );
   // console.log(isLoading, postSuccess);
+
+  const [postProduct, {isLoading,isError,isSuccess,error}] = useAddProductMutation();
+
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     toast.loading("Posting ......", { id: "addProduct" });
-  //   }
-  //   if (!isLoading && postSuccess) {
-  //     toast.success("Products Added", { id: "addProduct" });
-  //     dispatch(togglePostSuccess())
-  //     // navigate(-1)
-  //     reset()
-  //   }
-  //   if (!isLoading && isError) {
-  //     toast.error(error, { id: "addProduct" });
-  //   }
-  // }, [isLoading,postSuccess,isError,error,reset,dispatch])
-
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Posting ......", { id: "addProduct" });
+    }
+    if (!isLoading
+      //  && postSuccess
+       ) {
+      toast.success("Products Added", { id: "addProduct" });
+      dispatch(togglePostSuccess())
+      // navigate(-1)
+      reset()
+    }
+    if (!isLoading && isError) {
+      toast.error(error, { id: "addProduct" });
+    }
+  }, [isLoading,isError,error,reset,dispatch])
 
   const submit = (data) => {
     const product = {
@@ -46,8 +54,11 @@ const AddProduct = () => {
       ],
       spec: [],
     };
-    console.log(product);
-    dispatch(addProduct(product));
+
+    // console.log(product);
+    // dispatch(addProduct(product));
+
+    postProduct(product)
   };
 
   return (

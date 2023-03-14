@@ -7,11 +7,11 @@ export const productApi = createApi({
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () =>
-      "/products"
-      //  ({
-      //   uri: "/products",
-      // }),
+      query: (id) =>
+      // "/products"
+       ({
+        url: "/products",
+      }),
     }),
     addProduct: builder.mutation({
       query: (data) => ({
