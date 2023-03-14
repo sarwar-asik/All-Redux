@@ -5,6 +5,8 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
   }),
+  tagTypes: ["Products", "users"],
+  // added tag for refresh
   endpoints: (builder) => ({
     // get products
     getProducts: builder.query({
@@ -13,6 +15,7 @@ export const productApi = createApi({
         ({
           url: "/products",
         }),
+      providesTags: ["Products"],
     }),
     // add Products
     addProduct: builder.mutation({
@@ -21,6 +24,8 @@ export const productApi = createApi({
         method: "POST",
         body: data,
       }),
+      //  invalidatesTags:["Products"]  ////
+      //  I used already  refetchOnMountOrArgChange:true in Home.js
     }),
     // remove Products ///
     deleteProduct: builder.mutation({
@@ -28,6 +33,7 @@ export const productApi = createApi({
         url: `/product/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Products"],
     }),
   }),
 });
