@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetProductsQuery } from "../../feature/api/apiSlice";
 import {
   getProducts,
   removeProduct,
@@ -8,9 +9,11 @@ import {
 // import deleteProduct from "../../redux/thunk/products/deleteProduct";
 
 const ProductList = () => {
-  const { products, isLoading, deleteSuccess, isError, error } = useSelector(
-    (state) => state.products
-  );
+  // const { products, isLoading, deleteSuccess, isError, error } = useSelector(
+  //   (state) => state.products
+  // );
+  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery();
+  const products =data?.data
 
   const dispatch = useDispatch();
 const [refresh,setRefresh] =useState("")
@@ -25,12 +28,14 @@ const [refresh,setRefresh] =useState("")
     //   .then((data) => setProducts(data.data));
   }, [dispatch,refresh]);
 
-  useEffect(() => {
-    if (!isLoading && deleteSuccess) {
-      toast.success("Successfully Delete",{id:"deletedProduct"});
-      setRefresh("gooood")
-    }
-  }, [isLoading, deleteSuccess, isError, error,refresh]);
+  // useEffect(() => {
+  //   if (!isLoading 
+  //     // && deleteSuccess
+  //      ) {
+  //     toast.success("Successfully Delete",{id:"deletedProduct"});
+  //     setRefresh("gooood")
+  //   }
+  // }, [isLoading, deleteSuccess, isError, error,refresh]);
 
   if (isLoading) {
     return <p>Loading....</p>;

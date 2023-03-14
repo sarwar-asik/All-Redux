@@ -7,27 +7,27 @@ import { addProduct, togglePostSuccess } from "../../feature/products/productSli
 
 const AddProduct = () => {
   const { register, handleSubmit ,reset} = useForm();
-  const { isLoading, postSuccess, error, isError } = useSelector(
-    (state) => state.products
-  );
-  console.log(isLoading, postSuccess);
+  // const { isLoading, postSuccess, error, isError } = useSelector(
+  //   (state) => state.products
+  // );
+  // console.log(isLoading, postSuccess);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isLoading) {
-      toast.loading("Posting ......", { id: "addProduct" });
-    }
-    if (!isLoading && postSuccess) {
-      toast.success("Products Added", { id: "addProduct" });
-      dispatch(togglePostSuccess())
-      // navigate(-1)
-      reset()
-    }
-    if (!isLoading && isError) {
-      toast.error(error, { id: "addProduct" });
-    }
-  }, [isLoading,postSuccess,isError,error,reset,dispatch])
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     toast.loading("Posting ......", { id: "addProduct" });
+  //   }
+  //   if (!isLoading && postSuccess) {
+  //     toast.success("Products Added", { id: "addProduct" });
+  //     dispatch(togglePostSuccess())
+  //     // navigate(-1)
+  //     reset()
+  //   }
+  //   if (!isLoading && isError) {
+  //     toast.error(error, { id: "addProduct" });
+  //   }
+  // }, [isLoading,postSuccess,isError,error,reset,dispatch])
 
 
   const submit = (data) => {

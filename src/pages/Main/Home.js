@@ -29,6 +29,9 @@ const Home = () => {
   if (isLoading) {
     return <p className="font-bold ">Loading......</p>;
   }
+  if(isError){
+    return <h2 className="text-2xl font-bold text-red-600 "> Ocurred an Error. can not get data</h2>
+  }
 
   let content;
   if (products.length) {
