@@ -13,11 +13,13 @@ import {
 } from 'react-icons/hi';
 import { Button } from './ui/button';
 import { IProduct } from '@/types/globalTypes';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { addToCart, removeFromCart, removeOne } from '@/redux/features/cart/cartSlice';
 
 export default function Cart() {
 
-  const {products} = useAppSelector((state)=>state.cart)
+  const {products,total} = useAppSelector((state)=>state.cart)
+  const dispatch =useAppDispatch()
   
   console.log("🚀 ~ file: Cart.tsx:21 ~ Cart ~ products:", products)
 
@@ -26,7 +28,7 @@ export default function Cart() {
 
 
   // const products: IProduct[] = [];
-  const total = 0;
+  // const total = 0;
 
   //! **
 
@@ -45,11 +47,11 @@ export default function Cart() {
         <div className="space-y-5">
           {products?.map((product:IProduct) => (
             <div
-              className="border lg:h-[11rem] lg:p-5 py-2  block lg:flex justify-between rounded-md"
+              className="border lg:h-[14rem] lg:p-5 py-2  block lg:flex justify-between rounded-md"
               key={product.name}
             >
               <div className="border-r pr-5 shrink-0">
-                <img src={product?.image} alt="" className="h-full" />
+                <img src={product?.image} alt="" className="h-[100%]" />
               </div>
               <div className="px-2 w-full flex flex-col gap-3">
                 <h1 className="text-2xl self-center">{product?.name}</h1>
@@ -60,13 +62,16 @@ export default function Cart() {
                 </p>
               </div>
               <div className="border-l pl-5 flex flex-col justify-between gap-3">
-                <Button>
+                <Button
+                onClick={()=>dispatch(addToCart(product))}
+                >
                   <HiOutlinePlus size="20" />
                 </Button>
-                <Button>
+                <Button onClick={()=>dispatch(removeOne(product))} >
                   <HiMinus size="20" />
                 </Button>
                 <Button
+                onClick={()=>dispatch(removeFromCart(product))}
                   variant="destructive"
                   className="bg-red-500 hover:bg-red-400"
                 >
