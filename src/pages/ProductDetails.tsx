@@ -9,10 +9,9 @@ import {
   JSXElementConstructor,
   Key,
   ReactElement,
-  ReactFragment,
-  useEffect,
-  useState,
+  ReactFragment
 } from 'react';
+
 import { useParams } from 'react-router-dom';
 
 export default function ProductDetails() {
@@ -27,9 +26,9 @@ export default function ProductDetails() {
   //     .then((data) => setData(data));
   // }, []);
 
-  const { data: product } = useGetSingleProductQuery(id);
+  const { data: product,isError,isLoading } = useGetSingleProductQuery(id);
 
-  const handleAddProduct = (productData: IProduct) => {
+  const handleAddProduct = (productData: IProduct | undefined) => {
     dispatch(addToCart(productData));
 
     toast({
@@ -44,6 +43,10 @@ export default function ProductDetails() {
   return (
     <>
       <div className="flex max-w-7xl mx-auto items-center border-b border-gray-300">
+        {isLoading&&
+        <h2 className='text-2xl font-bold font-serif'>Loading the product ....</h2>
+
+        }
         <div className="w-[50%]">
           <img src={product?.image} alt="" />
         </div>
@@ -61,14 +64,14 @@ export default function ProductDetails() {
                   | null
                   | undefined
               ) => (
-                <li key={feature}>{feature} </li>
+                <li >{feature} </li>
               )
             )}
           </ul>
           <Button onClick={() => handleAddProduct(product)}>Add to cart</Button>
         </div>
       </div>
-      <ProductReview />
+      <ProductReview id={id!} />
     </>
   );
 }
