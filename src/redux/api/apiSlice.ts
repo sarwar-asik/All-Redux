@@ -8,32 +8,12 @@ export const api = createApi({
   }),
   tagTypes:['comments']
   ,
-  endpoints: (builder) => ({
-    getProducts: builder.query({
-      query: () => '/products',
-    }),
-    getSingleProduct: builder.query<IProduct, string | undefined>({
-      query: (id) => ({ url: `/product/${id}` }),
-    }),
-    postComment: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/comment/${id}`,
-        method: 'POST',
-        body: data,
-      }),
-      invalidatesTags:['comments']
-
-    }),
-    getComment: builder.query<Partial<{comments:string[]}>, string | undefined>({
-      query: (id) => ({ url: `/comment/${id}` }),
-      providesTags:['comments']
-    }),
-  }),
+  endpoints:() =>({}),
 });
 
-export const {
-  useGetProductsQuery,
-  useGetSingleProductQuery,
-  usePostCommentMutation,
-  useGetCommentQuery,
-} = api;
+// export const {
+//   useGetProductsQuery,
+//   useGetSingleProductQuery,
+//   usePostCommentMutation,
+//   useGetCommentQuery,
+// } = api;

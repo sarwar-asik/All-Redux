@@ -3,7 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { FiSend } from 'react-icons/fi';
-import { useGetCommentQuery, usePostCommentMutation } from '@/redux/api/apiSlice';
+import { useGetCommentQuery, usePostCommentMutation } from '@/redux/features/products/productApi';
+
 
 
 const dummyComments = [
@@ -31,7 +32,8 @@ export default function ProductReview({ id }: IProps) {
   console.log("🚀 ~ file: ProductReview.tsx:27 ~ ProductReview ~ isLoading:", isLoading)
 
  
-const {data:commentData} = useGetCommentQuery(id)
+const {data:commentData} = useGetCommentQuery(id,{refetchOnMountOrArgChange:true,pollingInterval:2000})
+
 console.log("🚀 ~ file: ProductReview.tsx:35 ~ ProductReview ~ commentData:", commentData)
 
 
