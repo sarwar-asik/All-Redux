@@ -56,9 +56,9 @@ export default function Products() {
     productsData = data?.data?.filter(
       (item: { price: number }) => item.price < priceRange
     );
-    if (productsData?.length < 1) {
-      productsData = data?.data;
-    }
+    // if (productsData?.length < 1) {
+    //   productsData = data?.data;
+    // }
   } else {
     productsData = data?.data;
   }

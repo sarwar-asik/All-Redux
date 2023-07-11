@@ -18,9 +18,7 @@ const productApi = api.injectEndpoints({
       invalidatesTags: ['comments'],
     }),
     getComment: builder.query<
-      Partial<{ comments: string[] }>,
-      string | undefined
-    >({
+      Partial<{ comments: string[] }>, string | undefined>({
       query: (id) => ({ url: `/comment/${id}` }),
       providesTags: ['comments'],
     }),

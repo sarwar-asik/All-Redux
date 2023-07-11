@@ -1,6 +1,6 @@
 [
   {
-    "_id": 1,
+    "id": 1,
     "name": "Haylou GST",
     "image": "https://live.staticflickr.com/65535/52953899202_478089ea5f_h.jpg",
     "price": 31.99,
@@ -16,7 +16,7 @@
     "rating": 4
   },
   {
-    "_id": 2,
+    "id": 2,
     "name": "Haylou GS",
     "image": "https://live.staticflickr.com/65535/52954632614_2db2bed3a7_h.jpg",
     "price": 32.38,
@@ -32,7 +32,7 @@
     "rating": 3
   },
   {
-    "_id": 3,
+    "id": 3,
     "name": "Haylou Solar Plus RT3",
     "image": "https://live.staticflickr.com/65535/52953899127_38e776f3f7_h.jpg",
     "price": 48.79,
@@ -40,14 +40,14 @@
       "Bluetooth 5.2, worry-free communication made easy",
       "Precise and clear experience with 1.43\" Amoled display",
       "5d looking level-up, exquisite metal bezel",
-      "Always-on display, conf_ident time control",
+      "Always-on display, confident time control",
       "Versatile watch faces, support customize watch face"
     ],
     "status": true,
     "rating": 5
   },
   {
-    "_id": 4,
+    "id": 4,
     "name": "Haylou RT2",
     "image": "https://live.staticflickr.com/65535/52954494936_efd69e2df9_h.jpg",
     "price": 38.99,
@@ -62,7 +62,7 @@
     "rating": 2
   },
   {
-    "_id": 5,
+    "id": 5,
     "name": "Haylou RS4 Plus",
     "image": "https://live.staticflickr.com/65535/52953899137_072c5c4ffc_h.jpg",
     "price": 54.84,
@@ -78,7 +78,7 @@
     "rating": 4
   },
   {
-    "_id": 6,
+    "id": 6,
     "name": "Haylou RS3",
     "image": "https://live.staticflickr.com/65535/52953899132_fead48e579_h.jpg",
     "price": 63.07,

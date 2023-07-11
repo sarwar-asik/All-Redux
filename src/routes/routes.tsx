@@ -7,7 +7,8 @@ import Products from '@/pages/Products';
 import Checkout from '@/pages/Checkout';
 
 import ProductDetails from '@/pages/ProductDetails';
-import { SignupForm } from '@/pages/Signup';
+import { SignUpForm } from '@/components/SignUpForm';
+
 
 const routes = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/signup',
-    element: <SignupForm />,
+    element: <SignUpForm />,
   },
   {
     path: '*',
