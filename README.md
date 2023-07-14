@@ -1,2 +1,2 @@
-# tech-net
-# book-store
+# Ready Frontend
+# Vite , React + Typescript + redux with login and signUP >>>
