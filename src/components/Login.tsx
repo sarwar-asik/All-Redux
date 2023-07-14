@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
+import { loginUser } from "../redux/features/users/userSLice";
 
 interface ILoginFormData {
   name: string;
@@ -8,6 +10,9 @@ interface ILoginFormData {
 }
 
 const Login = () => {
+
+  const dispatch = useAppDispatch()
+
   const {
     register,
     handleSubmit,
@@ -16,6 +21,8 @@ const Login = () => {
 
   const onSubmit = (data: ILoginFormData) => {
     console.log(data);
+    const {email,password} = data
+    dispatch(loginUser({email,password}))
   };
 
   return (

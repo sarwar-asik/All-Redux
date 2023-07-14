@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { createUser } from "../redux/features/users/userSLice";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 interface ISignupFormData {
   name: string;
@@ -8,16 +12,35 @@ interface ISignupFormData {
 }
 
 const SignUp = () => {
+
+  const dispatch = useAppDispatch()
+  const {error,isError,isLoading,user} = useAppSelector(state =>state.user)
+  console.log("🚀 ~ file: SignUp.tsx:18 ~ SignUp ~ user:", user)
+
+ 
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ISignupFormData>();
 
+  useEffect(() => {
+    if (isError && error) {
+      console.log("🚀 ~ file: SignUp.tsx:28 ~ useEffect ~ error:", error)
+      toast("Have an error")
+    }
+  }, [isError,error]);
+
   const onSubmit = (data: ISignupFormData) => {
-    console.log(data);
+  console.log("🚀 ~ file: SignUp.tsx:22 ~ onSubmit ~ data:", data)
+  const {name,email,password} = data
+  dispatch(createUser({name,email,password}))
+  toast("successFully added")
   };
   const passwordInput = document.getElementById("password") as HTMLInputElement;
+
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

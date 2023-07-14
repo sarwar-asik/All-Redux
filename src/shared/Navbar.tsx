@@ -1,15 +1,34 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../lib/firebase.config";
+import { logout } from "../redux/features/users/userSLice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
+  //! redux
+
+  const dispatch= useAppDispatch()
+
+
+  const data = useAppSelector(state => state.user)
+  
+  console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ data:", data)
+  
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(logout());
+    
+    });
   };
 
   const navItems = (
