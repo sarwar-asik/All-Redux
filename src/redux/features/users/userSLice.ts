@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
@@ -36,7 +35,7 @@ interface Icredential {
 
 export const createUser = createAsyncThunk(
   "user/createUser",
-  async ({ name, email, password }: Icredential) => {
+  async ({  email, password }: Icredential) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
     return data.user.email;
   }
@@ -45,7 +44,7 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: Icredential) => {
     const data = await signInWithEmailAndPassword(auth, email, password);
-    return data;
+    return data.user.email;
     // return {email,password}
   }
 );
@@ -85,9 +84,7 @@ const userSlice = createSlice({
         state.error = "";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-          console.log("🚀 ~ file: userSLice.ts:89 ~ .addCase ~ state11111:", state)
-          console.log("🚀 ~ file: userSLice.ts:89 ~ .addCase ~ action:222222", action)
-        state.user = action.payload;
+        state.user.email = action.payload;
         state.isLoading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {

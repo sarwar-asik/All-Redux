@@ -35,8 +35,8 @@ const SignUp = () => {
   const onSubmit = (data: ISignupFormData) => {
   console.log("🚀 ~ file: SignUp.tsx:22 ~ onSubmit ~ data:", data)
   const {name,email,password} = data
-  dispatch(createUser({name,email,password}))
-  toast("successFully added")
+  dispatch(createUser({email,password}))
+  toast("successFully SIgn Up[")
   };
   const passwordInput = document.getElementById("password") as HTMLInputElement;
 

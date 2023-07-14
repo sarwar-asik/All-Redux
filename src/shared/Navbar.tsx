@@ -13,9 +13,10 @@ const Navbar = () => {
   const dispatch= useAppDispatch()
 
 
-  const data = useAppSelector(state => state.user)
-  
-  console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ data:", data)
+  const {user} = useAppSelector(state => state.user)
+  console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ user:", user)
+
+
   
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -27,10 +28,9 @@ const Navbar = () => {
   const handleLogout = () => {
     signOut(auth).then(() => {
       dispatch(logout());
-    
+      setMenuOpen(false)
     });
   };
-
   const navItems = (
     <React.Fragment>
       <Link
@@ -40,6 +40,18 @@ const Navbar = () => {
       >
         Home
       </Link>
+     {user?.email ?
+      <Link
+      to="/login"
+      onClick={handleLogout}
+     
+      className="block mt-4 lg:inline-block lg:mt-0 text-red-600 hover:text-gray-800 mr-8"
+    >
+      logout
+    </Link>
+     
+     :
+     <>
       <Link
         to="/signup"
         onClick={closeMenu}
@@ -54,6 +66,12 @@ const Navbar = () => {
       >
         login
       </Link>
+     </>
+    
+
+
+     }
+     
       <Link
         to="/addBook"
         onClick={closeMenu}
