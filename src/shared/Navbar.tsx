@@ -10,14 +10,11 @@ const Navbar = () => {
 
   //! redux
 
-  const dispatch= useAppDispatch()
+  const dispatch = useAppDispatch();
 
+  const { user } = useAppSelector((state) => state.user);
+  console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ user:", user);
 
-  const {user} = useAppSelector(state => state.user)
-  console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ user:", user)
-
-
-  
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -28,7 +25,7 @@ const Navbar = () => {
   const handleLogout = () => {
     signOut(auth).then(() => {
       dispatch(logout());
-      setMenuOpen(false)
+      setMenuOpen(false);
     });
   };
   const navItems = (
@@ -40,38 +37,33 @@ const Navbar = () => {
       >
         Home
       </Link>
-     {user?.email ?
-      <Link
-      to="/login"
-      onClick={handleLogout}
-     
-      className="block mt-4 lg:inline-block lg:mt-0 text-red-600 hover:text-gray-800 mr-8"
-    >
-      logout
-    </Link>
-     
-     :
-     <>
-      <Link
-        to="/signup"
-        onClick={closeMenu}
-        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
-      >
-        SignUp
-      </Link>
-      <Link
-        to="/login"
-        onClick={closeMenu}
-        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
-      >
-        login
-      </Link>
-     </>
-    
+      {user?.email ? (
+        <Link
+          to="/login"
+          onClick={handleLogout}
+          className="block mt-4 lg:inline-block lg:mt-0 text-red-600 hover:text-gray-800 mr-8"
+        >
+          logout
+        </Link>
+      ) : (
+        <>
+          <Link
+            to="/signup"
+            onClick={closeMenu}
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+          >
+            SignUp
+          </Link>
+          <Link
+            to="/login"
+            onClick={closeMenu}
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+          >
+            login
+          </Link>
+        </>
+      )}
 
-
-     }
-     
       <Link
         to="/addBook"
         onClick={closeMenu}
