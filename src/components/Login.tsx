@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 interface ILoginFormData {
   name: string;
@@ -20,6 +21,9 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md">
+      <h3 className="text-center font-bold text-4xl  text-slate-400 my-2 font-serif">
+        Log In
+        </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -103,7 +107,14 @@ const Login = () => {
                     passwordInput.type === "password" ? "text" : "password";
                 }}
               ></button>
+            
             </div>
+            <h2 className="my-3 text-sm text-slate-600">
+            Are you new user ?{" "}
+            <Link className="font-mono " to="/signup">
+              sign up in please
+            </Link>
+          </h2>
           </div>
 
           <div className="flex items-center justify-between">

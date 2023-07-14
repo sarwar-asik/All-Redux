@@ -1,13 +1,9 @@
-
-
 import Books from "../components/Books";
 
 const Home = () => {
   return (
-    <div className="">
-      <Books/>
-
-
+    <div className="mt-[4rem]">
+      <Books />
     </div>
   );
 };
