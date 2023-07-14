@@ -22,18 +22,32 @@ const Navbar = () => {
         Home
       </Link>
       <Link
-        to="/contact"
+        to="/signup"
         onClick={closeMenu}
         className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
       >
-        Contact
+        SignUp
+      </Link>
+      <Link
+        to="/login"
+        onClick={closeMenu}
+        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+      >
+        login
+      </Link>
+      <Link
+        to="/addBook"
+        onClick={closeMenu}
+        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+      >
+        addBook
       </Link>
     </React.Fragment>
   );
 
   return (
     <nav
-      className={`bg-slate-5 shadow-lg fixed w-full top-0 backdrop-blur-sm ${
+      className={`bg-slate-5 shadow-lg fixed w-full top-0 backdrop-blur-sm  ${
         isMenuOpen ? "" : ""
       }`}
     >

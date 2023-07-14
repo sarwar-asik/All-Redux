@@ -1,22 +1,12 @@
-import React from "react";
+
+
+import Books from "../components/Books";
 
 const Home = () => {
   return (
-    <div>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
-      <h1> This is Home.tsx</h1>
+    <div className="">
+      <Books/>
+
 
     </div>
   );

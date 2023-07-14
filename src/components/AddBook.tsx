@@ -7,7 +7,7 @@ interface IBook {
   reviews: number;
 }
 
-const AddProductForm = () => {
+const AddBook = () => {
   const {
     register,
     handleSubmit,
@@ -155,4 +155,4 @@ const AddProductForm = () => {
   );
 };
 
-export default AddProductForm;
+export default AddBook;
