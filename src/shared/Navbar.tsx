@@ -42,7 +42,7 @@ const Navbar = () => {
             onClick={closeMenu}
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
           >
-           ALl Book
+           ALL Book
           </Link>
       {user?.email ? (
         <>

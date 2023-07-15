@@ -45,7 +45,7 @@ const ALlBook = () => {
     );
   });
 
-  console.log(searchTerm,"sssssss");
+//   console.log(searchTerm,"sssssss");
 
   // console.log(blogs, "from Blogs.js");
   // console.log(books,"form BBBBBBB");
@@ -54,7 +54,7 @@ const ALlBook = () => {
     <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 text-center">
       <h2 className="mt-1 text-3xl font-bold font-serif">Our All Book Store</h2>
 
-      <section className="my-2 py-3 bg-slate-300 rounded ">
+      <section className="my-2 py-3 flex items-center justify-center gap-3 bg-slate-300 rounded ">
         <input
           type="text"
           placeholder="Search books..."
@@ -62,6 +62,9 @@ const ALlBook = () => {
           value={searchTerm}
           onChange={handleSearch}
         />
+        {user?.email &&
+        <Link className="text-xl font-bold bg-blue-500 text-slate-200 px-4 py-2 rounded-lg " to='/addBook'>Add a Book</Link>
+        }
       </section>
 
       {books?.length < 1 && (
@@ -75,7 +78,7 @@ const ALlBook = () => {
         {filteredBooks?.map((book, i) => {
           const { _id, title, author, genre, publicationDate } = book;
           return (
-            <div key={i + 1} className="flex flex-wrap -mx-4">
+            <Link to={`/bookDetails/${_id}`} key={i + 1} className="flex flex-wrap -mx-4">
               <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
@@ -92,7 +95,7 @@ const ALlBook = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
