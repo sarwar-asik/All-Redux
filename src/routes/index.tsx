@@ -7,8 +7,9 @@ import Login from "../components/Login";
 import AddBook from "../components/AddBook";
 import BookDetail from "../components/BookDetail";
 import ALlBook from "../components/AllBook";
-import PrivateRoutes from "./privateRoutes";
+
 import UpdateBook from "../components/UpdateBook";
+import PrivateRoutes from "./PrivateRoutes";
 
 const routes = createBrowserRouter([
   {

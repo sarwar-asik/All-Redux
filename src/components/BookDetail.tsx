@@ -1,7 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 // import { useAppDispatch } from "../redux/hooks";
-import { useGetSingleBookQuery } from "../redux/features/book/bookAPi";
+import {
+  useDeleteBookMutation,
+  useGetSingleBookQuery,
+} from "../redux/features/book/bookAPi";
 import { useAppSelector } from "../redux/hooks";
+import Swal from "sweetalert2";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -11,6 +15,27 @@ const BookDetail = () => {
 
   const { data } = useGetSingleBookQuery(id);
   const book = data?.data;
+
+  const [deleteBook, { isLoading: isDeleting, isSuccess }] =
+    useDeleteBookMutation();
+  const navigate = useNavigate();
+
+  const handleDeleteBook = async (id: string | undefined) => {
+    console.log(user?.email, book?.user);
+    try {
+      if (user?.email === book?.user) {
+        await deleteBook({ id: id, email: user?.email });
+      } else {
+        Swal.fire("UnAuthorized", "You can not delete the Book", "error");
+      }
+      // Optionally show a success message or perform other actions
+    } catch (error) {
+      // Handle error, show an error message, etc.
+    }
+  };
+  if (isSuccess) {
+    navigate('/allBook');
+  }
 
   return (
     <div>
@@ -29,9 +54,17 @@ const BookDetail = () => {
 
         <section className="flex justify-around font-medium ">
           <Link
-           to={`/bookUpdate/${id}`}
-            className="shadow hover:shadow-2xl p-2  text-blue-500">Update Book</Link>
-          <button className="shadow hover:shadow-2xl p-2 text-red-500 ">Delete Book</button>
+            to={`/bookUpdate/${id}`}
+            className="shadow hover:shadow-2xl p-2  text-blue-500"
+          >
+            Update Book
+          </Link>
+          <button
+            onClick={() => handleDeleteBook(id)}
+            className="shadow hover:shadow-2xl p-2 text-red-500 "
+          >
+            Delete Book
+          </button>
         </section>
       </div>
     </div>
