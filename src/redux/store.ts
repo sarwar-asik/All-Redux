@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import logger from "./middleware/logger";
+// import logger from "./middleware/logger";
 import userSLice from "./features/users/userSLice";
 import { api } from "./api/apiSLice";
 
