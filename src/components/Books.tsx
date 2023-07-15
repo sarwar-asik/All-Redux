@@ -36,7 +36,7 @@ const Books = () => {
             return (
               <div className="flex flex-wrap -mx-4">
             
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 px-4">
+              <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
                   <p className="text-gray-600 mb-4">{author}</p>
