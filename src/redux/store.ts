@@ -11,7 +11,7 @@ const store = configureStore({
     user:userSLice,
     [api.reducerPath]:api.reducer
   },
-  middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(logger)
+  middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(api.middleware)
   // devTools:true
 })
 

@@ -1,15 +1,28 @@
-import { useEffect, useState } from 'react';
-import main_api from '../shared/mainAPi';
-import { Link } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
+// import main_api from '../shared/mainAPi';
+// import { Link } from 'react-router-dom';
+import { useGetBookQuery } from '../redux/features/book/bookAPi';
 
+
+export interface IBook {
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+}
 const Books = () => {
-    let [books, setBooks] = useState([]);
+    // let [books, setBooks] = useState([]);
   
-    useEffect(() => {
-      fetch(`${main_api}/books`)
-        .then((res) => res.json())
-        .then((books) => setBooks(books.data));
-    }, []);
+    // useEffect(() => {
+    //   fetch(`${main_api}/books`)
+    //     .then((res) => res.json())
+    //     .then((books) => setBooks(books.data));
+    // }, []);
+
+    const {data} = useGetBookQuery(undefined)
+    console.log("🚀 ~ file: Books.tsx:16 ~ Books ~ data:", data)
+    
+    const books:IBook[] = data?.data
   
     // console.log(blogs, "from Blogs.js");
     // console.log(books,"form BBBBBBB");
