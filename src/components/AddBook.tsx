@@ -150,33 +150,7 @@ const AddBook = () => {
           )}
         </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="reviews"
-          >
-            Reviews
-          </label>
-          <input
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-              errors.reviews ? "border-red-500" : ""
-            }`}
-            type="number"
-            placeholder="Enter number of reviews"
-            id="reviews"
-            {...register("reviews", { required: "reviews is required" })}
-          />
-          {errors.reviews && errors.reviews.type === "required" && (
-            <p className="text-red-500 text-xs italic">
-              Number of reviews is required
-            </p>
-          )}
-          {errors.reviews && errors.reviews.type === "min" && (
-            <p className="text-red-500 text-xs italic">
-              Number of reviews must be a positive number
-            </p>
-          )}
-        </div>
+      
 
         <div className="flex items-center justify-between">
           <button

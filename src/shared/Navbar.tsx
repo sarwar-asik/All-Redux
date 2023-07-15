@@ -37,6 +37,13 @@ const Navbar = () => {
       >
         Home
       </Link>
+      <Link
+            to="/allBook"
+            onClick={closeMenu}
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+          >
+           ALl Book
+          </Link>
       {user?.email ? (
         <>
         <Link
@@ -57,6 +64,7 @@ const Navbar = () => {
         
       ) : (
         <>
+        
           <Link
             to="/signup"
             onClick={closeMenu}
