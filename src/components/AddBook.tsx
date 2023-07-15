@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { usePostBookMutation } from "../redux/features/book/bookAPi";
 import Swal from "sweetalert2";
 import { setNotification } from "../redux/notification/notificationSLice";
-interface IBook {
+export interface IBook {
   title: string;
   author: string;
   genre: string;
@@ -41,14 +41,12 @@ const AddBook = () => {
         Swal.fire('Added Book', 'Successfully added books', 'success');
         dispatch(setNotification({ message: 'Successfully added books', type: 'success' }));
         reset()
-
       })
       .catch((error) => {
         Swal.fire('Error', 'Failed to add book', 'error');
         dispatch(setNotification({ message: 'Failed to add book', type: 'error' }));
       });
     }else{
-     
       Swal.fire({
         icon: 'error',
         title: 'You are not valid user',
