@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
+
 import logger from "./middleware/logger";
 import userSLice from "./features/users/userSLice";
+import { api } from "./api/apiSLice";
 
 
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    user:userSLice
+    user:userSLice,
+    [api.reducerPath]:api.reducer
   },
   middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(logger)
   // devTools:true
