@@ -43,20 +43,19 @@ const Books = () => {
         <h2>Loading ..............</h2>
           </div>
         )}
-  
         <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
           {/*  */}
           {books?.map((book, i) => {
             const {_id,title,author,genre, publicationDate} = book
             return (
-              <Link to={`/bookDetails/${_id}`} key={i+1} className="flex flex-wrap -mx-4">
+              <Link to={`/bookDetails/${_id}`} key={i+1} className="flex flex-wrap -mx-4 hover:shadow-2xl">
               <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
                   <p className="text-gray-600 mb-4">{author}</p>
                   <p className="text-gray-600">{genre}</p>
                   <p className="text-gray-600">Publication Date: {publicationDate}</p>
-                  <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link>
+                  {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
                 </div>
               </div>
               </Link>

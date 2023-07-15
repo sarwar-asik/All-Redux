@@ -34,7 +34,7 @@ const SignUp = () => {
   const onSubmit = (data: ISignupFormData) => {
     const { name, email, password } = data;
     console.log("🚀 ~ file: SignUp.tsx:22 ~ onSubmit ~ data:", data,name);
-    dispatch(createUser({ email, password }));
+    dispatch(createUser({ email, password }))
     toast("successFully SIgn Up");
   };
   const passwordInput = document.getElementById("password") as HTMLInputElement;
@@ -125,7 +125,6 @@ const SignUp = () => {
                     passwordInput.type === "password" ? "text" : "password";
                 }}
               >
-                {/* {passwordInput?.type === "password" ? "Show password":""} */}
                 show
               </button>
             </div>

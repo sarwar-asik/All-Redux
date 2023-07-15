@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { usePostBookMutation } from "../redux/features/book/bookAPi";
 import Swal from "sweetalert2";
+import { setNotification } from "../redux/notification/notificationSLice";
 interface IBook {
   title: string;
   author: string;
@@ -14,6 +15,7 @@ interface IBook {
 const AddBook = () => {
 
   const { user } = useAppSelector((state) => state?.user);
+  const dispatch = useAppDispatch()
   // console.log("🚀 ~ file: AddBook.tsx:16 ~ AddBook ~ user:", user)
 
   // const [postBook,{isLoading,isError,isSuccess,error}]= usePostBookMutation()
@@ -24,7 +26,7 @@ const AddBook = () => {
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm<IBook>();
 
@@ -33,18 +35,24 @@ const AddBook = () => {
     if(user?.email){
       data.user = user?.email
       console.log(data);
-      addBook(data)
-      Swal.fire(
-        'Added Book',
-        'successfull added books',
-        'success'
-      )
+       addBook(data)
+      .unwrap()
+      .then(() => {
+        Swal.fire('Added Book', 'Successfully added books', 'success');
+        dispatch(setNotification({ message: 'Successfully added books', type: 'success' }));
+        reset()
+
+      })
+      .catch((error) => {
+        Swal.fire('Error', 'Failed to add book', 'error');
+        dispatch(setNotification({ message: 'Failed to add book', type: 'error' }));
+      });
     }else{
      
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        title: 'You are not valid user',
+        text: 'Login Please',
         footer: '<a href="">Why do I have this issue?</a>'
       })
     }

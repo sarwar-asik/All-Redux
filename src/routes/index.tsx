@@ -7,6 +7,8 @@ import Login from "../components/Login";
 import AddBook from "../components/AddBook";
 import BookDetail from "../components/BookDetail";
 import ALlBook from "../components/AllBook";
+import PrivateRoutes from "./privateRoutes";
+import UpdateBook from "../components/UpdateBook";
 
 const routes = createBrowserRouter([
   {
@@ -27,15 +29,20 @@ const routes = createBrowserRouter([
       },
       {
         path:"/addBook",
-        element: <AddBook />,
+        element: <PrivateRoutes><AddBook/></PrivateRoutes>,
       },
       {
         path:"/allBook",
-        element: <ALlBook />,
+        element: 
+          <ALlBook/>        
       },
       {
         path:"/bookDetails/:id",
         element: <BookDetail></BookDetail>
+      },
+      {
+        path:"/bookUpdate/:id",
+        element: <UpdateBook/>
       },
     ],
   },

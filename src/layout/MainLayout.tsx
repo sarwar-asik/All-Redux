@@ -5,7 +5,7 @@ import Footer from "../shared/Footer";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="font-serif">
      
       <Navbar />
     <section 
