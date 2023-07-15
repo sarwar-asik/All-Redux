@@ -9,7 +9,7 @@ const MainLayout = () => {
      
       <Navbar />
     <section 
-    // className="mt-[4rem]"
+    className="mt-[4rem]"
     >
     <Outlet></Outlet>
     </section>

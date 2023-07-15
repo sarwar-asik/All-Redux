@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
+import { useAppSelector } from "../redux/hooks";
 interface IBook {
   title: string;
   author: string;
   genre: string;
   publicationDate: string;
   reviews: number;
+  user?:string | null
 }
 
 const AddBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
@@ -15,10 +19,17 @@ const AddBook = () => {
   } = useForm<IBook>();
 
   const onSubmit = (data: IBook) => {
-    console.log(data);
+    console.log(data)
+    data.user = user.email
+
+
+
   };
   return (
-    <div>
+    <div className="min-h-screen">
+       <h3 className="text-center font-bold text-4xl  text-slate-400 my-2 font-serif ">
+         Add A Book
+        </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto">
         <div className="mb-4">
           <label

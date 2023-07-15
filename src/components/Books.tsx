@@ -47,7 +47,7 @@ const Books = () => {
           {books?.map((book, i) => {
             const {title,author,genre, publicationDate} = book
             return (
-              <div className="flex flex-wrap -mx-4">
+              <div key={i+1} className="flex flex-wrap -mx-4">
             
               <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
