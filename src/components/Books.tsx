@@ -6,6 +6,7 @@ import { useGetBookQuery } from '../redux/features/book/bookAPi';
 
 
 export interface IBook {
+  _id?:string | any
   title: string;
   author: string;
   genre: string;

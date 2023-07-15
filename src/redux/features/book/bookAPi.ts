@@ -3,6 +3,10 @@ import { api } from "../../api/apiSLice";
 const bookAPi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBook: builder.query({
+      query: () => "/books/book",
+      providesTags: ["book"],
+    }),
+    getAllBook: builder.query({
       query: () => "/books",
       providesTags: ["book"],
     }),
@@ -13,12 +17,12 @@ const bookAPi = api.injectEndpoints({
       query: (data) => ({
         method: "POST",
         url: "/books",
-        body: data
+        body: data,
       }),
       invalidatesTags: ["book"],
     }),
   }),
 });
 
-export const { useGetBookQuery, useGetSingleBookQuery, usePostBookMutation } =
+export const { useGetBookQuery, useGetSingleBookQuery, usePostBookMutation,useGetAllBookQuery } =
   bookAPi;

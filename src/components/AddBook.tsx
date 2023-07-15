@@ -12,12 +12,13 @@ interface IBook {
 }
 
 const AddBook = () => {
-  const { user } = useAppSelector((state) => state.user);
+
+  const { user } = useAppSelector((state) => state?.user);
   // console.log("🚀 ~ file: AddBook.tsx:16 ~ AddBook ~ user:", user)
 
   // const [postBook,{isLoading,isError,isSuccess,error}]= usePostBookMutation()
 
-  const [addBook,{isLoading,isError,isSuccess,}] = usePostBookMutation()
+  const [addBook,{isLoading,isError,isSuccess}] = usePostBookMutation()
 
   console.log({isLoading:isLoading,isError,isSuccess:isSuccess});
   const {
@@ -33,11 +34,11 @@ const AddBook = () => {
       data.user = user?.email
       console.log(data);
       addBook(data)
-      // Swal.fire(
-      //   'Added Book',
-      //   'successfull added books',
-      //   'success'
-      // )
+      Swal.fire(
+        'Added Book',
+        'successfull added books',
+        'success'
+      )
     }else{
      
       Swal.fire({
