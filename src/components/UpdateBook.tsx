@@ -20,7 +20,7 @@ const UpdateBook = () => {
     refetchOnMountOrArgChange: true,
   });
   const book = bookDatas?.data;
-  console.log("start", book, "book close");
+  // console.log("start", book, "book close");
 
   const [UpdateBook, { isLoading, isError, isSuccess }] =
     useUpdateBookMutation();
@@ -28,7 +28,6 @@ const UpdateBook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<IBook>();
 
   const onSubmit = (data: IBook) => {
@@ -56,6 +55,7 @@ const UpdateBook = () => {
           dispatch(
             setNotification({ message: "Failed to Update book", type: "error" })
           );
+          console.log(error,"form catch");
         });
     } else {
       Swal.fire({

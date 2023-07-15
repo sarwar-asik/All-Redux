@@ -16,7 +16,7 @@ const BookDetail = () => {
   const { data } = useGetSingleBookQuery(id);
   const book = data?.data;
 
-  const [deleteBook, { isLoading: isDeleting, isSuccess }] =
+  const [deleteBook, { isSuccess }] =
     useDeleteBookMutation();
   const navigate = useNavigate();
 
