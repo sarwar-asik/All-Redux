@@ -7,5 +7,7 @@ export const api = createApi({
     baseQuery:fetchBaseQuery({
         baseUrl:main_api
     }),
+    tagTypes:['books']
+    ,
     endpoints:()=>({})
 })

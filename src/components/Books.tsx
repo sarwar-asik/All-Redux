@@ -1,6 +1,7 @@
 // import { useEffect, useState } from 'react';
 // import main_api from '../shared/mainAPi';
 // import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useGetBookQuery } from '../redux/features/book/bookAPi';
 
 
@@ -45,7 +46,7 @@ const Books = () => {
         <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
           {/*  */}
           {books?.map((book, i) => {
-            const {title,author,genre, publicationDate} = book
+            const {_id,title,author,genre, publicationDate} = book
             return (
               <div key={i+1} className="flex flex-wrap -mx-4">
             
@@ -55,6 +56,7 @@ const Books = () => {
                   <p className="text-gray-600 mb-4">{author}</p>
                   <p className="text-gray-600">{genre}</p>
                   <p className="text-gray-600">Publication Date: {publicationDate}</p>
+                  <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link>
                 </div>
               </div>
               </div>

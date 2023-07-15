@@ -38,6 +38,7 @@ const Navbar = () => {
         Home
       </Link>
       {user?.email ? (
+        <>
         <Link
           to="/login"
           onClick={handleLogout}
@@ -45,6 +46,15 @@ const Navbar = () => {
         >
           logout
         </Link>
+        <Link
+        to="/addBook"
+        onClick={closeMenu}
+        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
+      >
+        addBook
+      </Link>
+        </>
+        
       ) : (
         <>
           <Link
@@ -61,16 +71,11 @@ const Navbar = () => {
           >
             login
           </Link>
+          
         </>
       )}
 
-      <Link
-        to="/addBook"
-        onClick={closeMenu}
-        className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 hover:text-gray-800 mr-8"
-      >
-        addBook
-      </Link>
+      
     </React.Fragment>
   );
 

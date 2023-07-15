@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAppSelector } from "../redux/hooks";
+import { usePostBookMutation } from "../redux/features/book/bookAPi";
+import Swal from "sweetalert2";
 interface IBook {
   title: string;
   author: string;
@@ -11,18 +13,38 @@ interface IBook {
 
 const AddBook = () => {
   const { user } = useAppSelector((state) => state.user);
+  console.log("🚀 ~ file: AddBook.tsx:16 ~ AddBook ~ user:", user)
 
+  const [postBook,{isLoading,isError,isSuccess,error}]= usePostBookMutation()
+
+  console.log({isLoading:isLoading,isError,isSuccess:isSuccess,error});
   const {
     register,
     handleSubmit,
+    // reset,
     formState: { errors },
   } = useForm<IBook>();
 
   const onSubmit = (data: IBook) => {
     console.log(data)
-    data.user = user.email
-
-
+    if(user?.email){
+      data.user = user.email
+      console.log(data);
+      postBook(data)
+      Swal.fire(
+        'Added Book',
+        'successfull added books',
+        'success'
+      )
+    }else{
+     
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
 
   };
   return (
