@@ -21,7 +21,7 @@ const Books = () => {
     //     .then((books) => setBooks(books.data));
     // }, []);
 
-    const {data} = useGetBookQuery(undefined)
+    const {data,isLoading} = useGetBookQuery(undefined)
     console.log("🚀 ~ file: Books.tsx:16 ~ Books ~ data:", data)
     
     const books:IBook[] = data?.data
@@ -38,7 +38,7 @@ const Books = () => {
         </p>
   
   
-        {books?.length < 1 && (
+        {isLoading && (
           <div className="mt-1 text-xl font-bold font-serif text-center">
         <h2>Loading ..............</h2>
           </div>
@@ -48,7 +48,7 @@ const Books = () => {
           {books?.map((book, i) => {
             const {_id,title,author,genre, publicationDate} = book
             return (
-              <Link to={`/bookDetails/${_id}`} key={i+1} className="flex flex-wrap -mx-4 hover:shadow-2xl">
+              <Link to={`/bookDetails/${_id}`} key={i+1} className="flex flex-wrap -mx-4 hover:shadow-2xl hover:scale-110 ">
               <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
@@ -63,6 +63,14 @@ const Books = () => {
             );
           })}
         </div>
+
+        <Link
+            to="/allBook"
+        
+            className="block mt-7 lg:inline-block lg:mt-0 text-gray-100  mr-8 p-2 bg-blue-600 hover:text-blue-600 hover:bg-gray-300 hover:shadow-2xl hover:scale-110 w-full mx-auto rounded-t-xl font-bold text-xl "
+          >
+          See All
+          </Link>
   
         
       </div>
