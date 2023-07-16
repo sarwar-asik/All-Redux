@@ -1,6 +1,3 @@
-// import { useEffect, useState } from 'react';
-// import main_api from '../shared/mainAPi';
-// import { Link } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useGetAllBookQuery } from "../redux/features/book/bookAPi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -33,7 +30,7 @@ const ALlBook = () => {
   const { user } = useAppSelector((state) => state.user);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectOption, setSelectOption] = useState("");
+  // const [selectOption, setSelectOption] = useState("");
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -111,34 +108,25 @@ const ALlBook = () => {
         {filteredBooks?.map((book, i) => {
           const { _id, title, author, genre, publicationDate } = book;
           return (
-            <div key={i + 1} className="flex flex-wrap -mx-4 hover:scale-110 ">
-              <div className="w-full  px-4">
-                <Link to={`/bookDetails/${_id}`} className="bg-white shadow-md rounded-lg p-6">
-                  <h2 className="text-lg font-bold mb-2">{title}</h2>
-                  <p className="text-gray-600 mb-4">Author {author}</p>
-                  <p className="text-gray-600">Genre:: {genre}</p>
-                  <p className="text-gray-600">
-                    Publication Date: {publicationDate}
-                  </p>
-                </Link>
-                <section className="w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium">
-                  <Link to={`/bookDetails/${_id}`} className="py-2 bg-slate-300 rounded-sm my-2 px-1">
-                    Go Details
-                  </Link>
-                  <button
-                    onClick={() => handleAddBook(book)}
-                    className="py-2 bg-green-300 rounded-sm my-2 px-1"
-                  >
-                    Add Wishlist
-                  </button>
-                  <button
-                    onClick={() => handleAddReaded(book)}
-                    className="py-2 bg-blue-300 rounded-sm my-2 px-1 "
-                  >
-                    Add Readed
-                  </button>
-                </section>
+            <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-1 text-center">
+            <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-1 ">
+              <div className="bg-white ">
+                <h2 className="text-lg font-bold mb-2">{title}</h2>
+                <p className="text-gray-600 mb-4">{author}</p>
+                <p className="text-gray-600">{genre}</p>
+                <p className="text-gray-600">Publication Date: {publicationDate}</p>
+                {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
               </div>
+            </Link>
+            <section className='mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
+            
+              <button
+              onClick={()=>handleAddBook(book)} 
+               className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+              <button
+              onClick={()=> handleAddReaded(book)} 
+               className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
+            </section>
             </div>
           );
         })}

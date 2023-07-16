@@ -47,15 +47,21 @@ const routes = createBrowserRouter([
       },
       {
         path: "/bookUpdate/:id",
-        element: <UpdateBook />,
+        element: <PrivateRoutes>
+        <UpdateBook />
+      </PrivateRoutes> ,
       },
       {
         path: "/wishlist",
-        element: <Cart />,
+        element:  <PrivateRoutes>
+       <Cart />
+      </PrivateRoutes>,
       },
       {
         path: "/readedBook",
-        element: <ReadedBook />,
+        element:  <PrivateRoutes>
+       <ReadedBook />
+      </PrivateRoutes>,
       },
     ],
   },

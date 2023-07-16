@@ -1,5 +1,4 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import { useAppDispatch } from "../redux/hooks";
 import {
   useDeleteBookMutation,
   useGetReviewQuery,

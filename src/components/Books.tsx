@@ -66,8 +66,8 @@ const Books = () => {
           {books?.map((book, i) => {
             const {_id,title,author,genre, publicationDate} = book
             return (
-              <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-1 ">
-              <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-1 shadow-md">
+              <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-1 text-center">
+              <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-1 ">
                 <div className="bg-white ">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
                   <p className="text-gray-600 mb-4">{author}</p>
@@ -76,7 +76,7 @@ const Books = () => {
                   {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
                 </div>
               </Link>
-              <section className='w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
+              <section className='mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
                 <Link to={`/bookDetails/${_id}`} className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</Link>
                 <button
                 onClick={()=>handleAddBook(book)} 
