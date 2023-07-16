@@ -30,6 +30,7 @@ const ALlBook = () => {
   const { user } = useAppSelector((state) => state.user);
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectOption,setSelectOption] = useState('')
 
   const handleSearch = (e:ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -57,17 +58,26 @@ const ALlBook = () => {
     <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 text-center">
       <h2 className="mt-1 text-3xl font-bold font-serif">Our All Book Store</h2>
 
-      <section className="my-2 py-3 flex items-center justify-center gap-3 bg-slate-300 rounded ">
+      <section className="my-2 py-3 grid grid-cols-1 lg:grid-cols-2 gap-3 bg-slate-300 rounded ">
+      <select name="" id="" className="py-3 my-2 px-2 outline-none">
+          <option  value="" disabled>Search Book</option>
+          <option value="">Genre</option>
+          <option value="">Publication Year</option>
+        </select>
         <input
           type="text"
-          placeholder="Search books..."
-          className="border border-gray-300 rounded py-2 px-4 mr-2"
+          placeholder="Search by title author genre"
+          className="border border-gray-300 rounded py-2  px-4 mr-2"
           value={searchTerm}
           onChange={handleSearch}
         />
+        
+
+        <div className="w-full">
         {user?.email &&
-        <Link className="text-xl font-bold bg-blue-500 text-slate-200 px-4 py-2 rounded-lg " to='/addBook'>Add a Book</Link>
+        <Link className="text-xl font-bold w-full bg-blue-500 text-slate-200 px-4 py-2 rounded-lg " to='/addBook'>Add a Book</Link>
         }
+        </div>
       </section>
 
       {isLoading && (

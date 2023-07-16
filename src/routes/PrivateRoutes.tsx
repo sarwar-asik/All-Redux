@@ -6,6 +6,7 @@ interface IProps {
   children: ReactNode;
 }
 
+
 const PrivateRoutes = ({ children }: IProps) => {
   const { user, isLoading } = useAppSelector((state) => state.user);
   const pathName = useLocation();

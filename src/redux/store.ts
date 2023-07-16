@@ -4,13 +4,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSLice from "./features/users/userSLice";
 import { api } from "./api/apiSLice";
 import notificationSLice from "./notification/notificationSLice";
+import WishlistSlice from "./features/whislist/whislistSlice";
 
 
 
 const store = configureStore({
   reducer: {
     user:userSLice,
-    notification:notificationSLice
+    notification:notificationSLice,
+    wishlist:WishlistSlice
     ,
     [api.reducerPath]:api.reducer
   },

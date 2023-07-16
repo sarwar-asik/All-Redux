@@ -3,9 +3,11 @@
 // import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useGetBookQuery } from '../redux/features/book/bookAPi';
+import { useAppDispatch } from '../redux/hooks';
+import { addToWishlist } from '../redux/features/whislist/whislistSlice';
 
 
-export interface IBook {
+ interface IBook {
   _id?:string | any
   title: string;
   author: string;
@@ -13,6 +15,7 @@ export interface IBook {
   publicationDate: string;
 }
 const Books = () => {
+
     // let [books, setBooks] = useState([]);
   
     // useEffect(() => {
@@ -28,6 +31,14 @@ const Books = () => {
   
     // console.log(blogs, "from Blogs.js");
     // console.log(books,"form BBBBBBB");
+
+    //! Add to cart section 
+
+    const dispatch = useAppDispatch()
+
+    const handleAddBook = (BookData: IBook ) => {
+      dispatch(addToWishlist(BookData))
+    };
   
     return (
       <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 text-center">
@@ -43,22 +54,29 @@ const Books = () => {
         <h2>Loading ..............</h2>
           </div>
         )}
-        <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+        <div className="grid  lg:grid-cols-3 gap-7 sm:max-w-sm sm:mx-auto lg:max-w-full mt-5">
           {/*  */}
           {books?.map((book, i) => {
             const {_id,title,author,genre, publicationDate} = book
             return (
-              <Link to={`/bookDetails/${_id}`} key={i+1} className="flex flex-wrap -mx-4 hover:shadow-2xl hover:scale-110 ">
-              <div className="w-full  px-4">
-                <div className="bg-white shadow-md rounded-lg p-6">
+              <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-3  ">
+              <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-2 shadow-md">
+                <div className="bg-white ">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
                   <p className="text-gray-600 mb-4">{author}</p>
                   <p className="text-gray-600">{genre}</p>
                   <p className="text-gray-600">Publication Date: {publicationDate}</p>
                   {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
                 </div>
-              </div>
               </Link>
+              <section className='w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
+                <button className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</button>
+                <button
+                onClick={()=>handleAddBook(book)} 
+                 className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+              </section>
+              
+              </div>
               
             );
           })}

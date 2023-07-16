@@ -4,10 +4,13 @@ import Footer from "../shared/Footer";
 
 
 const MainLayout = () => {
+ 
   return (
     <div className="font-serif">
      
       <Navbar />
+
+  
     <section 
     className="mt-[4rem]"
     >
