@@ -118,15 +118,16 @@ const ALlBook = () => {
                 {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
               </div>
             </Link>
+            {user?.email&&
             <section className='mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
             
-              <button
-              onClick={()=>handleAddBook(book)} 
-               className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
-              <button
-              onClick={()=> handleAddReaded(book)} 
-               className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
-            </section>
+            <button
+            onClick={()=>handleAddBook(book)} 
+             className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+            <button
+            onClick={()=> handleAddReaded(book)} 
+             className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
+          </section>}
             </div>
           );
         })}

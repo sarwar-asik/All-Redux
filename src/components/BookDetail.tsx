@@ -66,50 +66,48 @@ const BookDetail = () => {
     };
 
     console.log(option, "review");
-
-    postComment(option)
-      .unwrap()
-      .then(() => {
-        Swal.fire("Added review", "Successfully added reviews", "success");
-        dispatch(
-          setNotification({
-            message: "Successfully added reviews",
-            type: "success",
-          })
-        );
-        setInputValue("");
-      })
-      .catch((error: any) => {
-        console.log(error);
-        Swal.fire("Error", "Failed to add review", "error");
-        dispatch(
-          setNotification({ message: "Failed to add review", type: "error" })
-        );
-      });
+    if (user?.email) {
+      postComment(option)
+        .unwrap()
+        .then(() => {
+          Swal.fire("Added review", "Successfully added reviews", "success");
+          dispatch(
+            setNotification({
+              message: "Successfully added reviews",
+              type: "success",
+            })
+          );
+          setInputValue("");
+        })
+        .catch((error: any) => {
+          console.log(error);
+          Swal.fire("Error", "Failed to add review", "error");
+          dispatch(
+            setNotification({ message: "Failed to add review", type: "error" })
+          );
+        });
+    } else {
+      navigate("/login");
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(event.target.value);
   };
 
-
-
-
-
-
   const handleAddBook = (BookData: IBook) => {
-    dispatch(addToWishlist(BookData))
-    Swal.fire('Added WishList', 'Successfully added books', 'success');
+    dispatch(addToWishlist(BookData));
+    Swal.fire("Added WishList", "Successfully added books", "success");
   };
-  const handleAddReaded = (BookData: IBook ) => {
-    dispatch(addToReaded(BookData))
-    Swal.fire('Added Readed', 'Successfully added books', 'success');
+  const handleAddReaded = (BookData: IBook) => {
+    dispatch(addToReaded(BookData));
+    Swal.fire("Added Readed", "Successfully added books", "success");
   };
 
   return (
     <div>
       {/* //! Book Detail Section */}
-      
+
       <section className="max-w-md mx-auto mt-8 p-8 bg-white shadow-md rounded-lg ">
         <h2 className="text-2xl font-bold mb-4">{book?.title}</h2>
         <p className="text-gray-600 mb-4">
@@ -140,29 +138,31 @@ const BookDetail = () => {
           </section>
         )}
       </section>
-      <section className="w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium">
-               
-                  <button
-                    onClick={() => handleAddBook(book)}
-                    className="py-2 bg-green-300 rounded-sm my-2 px-1"
-                  >
-                    Add Wishlist
-                  </button>
-                  <button
-                    onClick={() => handleAddReaded(book)}
-                    className="py-2 bg-blue-300 rounded-sm my-2 px-1 "
-                  >
-                    Add Readed
-                  </button>
-                </section>
+      {user?.email && (
+        <section className="w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium">
+          <button
+            onClick={() => handleAddBook(book)}
+            className="py-2 bg-green-300 rounded-sm my-2 px-1"
+          >
+            Add Wishlist
+          </button>
+          <button
+            onClick={() => handleAddReaded(book)}
+            className="py-2 bg-blue-300 rounded-sm my-2 px-1 "
+          >
+            Add Readed
+          </button>
+        </section>
+      )}
       {/* //! Review Section /// */}
-      <section className="max-w-md mx-auto mt-8 p-8 bg-white shadow-md rounded-lg my-7">
-        <h2 className="text-md font-bold mb-4">Add Review</h2>
+      <section className="block lg:flex justify-around max-w-m mx-auto mt-8 p-8 bg-white shadow-md rounded-lg my-7">
+      
 
         <form
           className="flex gap-5 items-center justify-around"
           onSubmit={handleSubmit}
         >
+            <h2 className="text-md font-bold mb-4">Add Review</h2>
           <textarea
             className="min-h-[50px] bg-slate-700 outline-none rounded-xl  py-2 text-center font-mono text-slate-100 tex-2xl"
             onChange={handleChange}
@@ -176,13 +176,15 @@ const BookDetail = () => {
           </button>
         </form>
 
+        <div className="">
         <h3 className="mt-7 font-bold text-xl ">Users Comments ::</h3>
-        <div className="mt-6">
+        <div className="mt-6 ">
           {commentData?.data?.reviews?.map((comment: string, index: number) => (
             <div key={index} className="flex gap-3 items-center mb-5">
               <p>{comment}</p>
             </div>
           ))}
+        </div>
         </div>
       </section>
     </div>

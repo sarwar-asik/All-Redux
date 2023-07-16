@@ -3,7 +3,7 @@
 // import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useGetBookQuery } from '../redux/features/book/bookAPi';
-import { useAppDispatch } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { addToWishlist } from '../redux/features/whislist/whislistSlice';
 import { addToReaded } from '../redux/features/readedBook/readedBookSlice';
 import Swal from 'sweetalert2';
@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
   publicationDate: string;
 }
 const Books = () => {
+  const { user } = useAppSelector((state) => state.user);
 
     // let [books, setBooks] = useState([]);
   
@@ -76,15 +77,18 @@ const Books = () => {
                   {/* <Link to={`/bookDetails/${_id}`} className='bg-slate-300 p-2 m-1 shadow-lg font-serif my-4 rounded-md'>Details</Link> */}
                 </div>
               </Link>
+             {
+              user?.email &&
               <section className='mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
-                <Link to={`/bookDetails/${_id}`} className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</Link>
-                <button
-                onClick={()=>handleAddBook(book)} 
-                 className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
-                <button
-                onClick={()=> handleAddReaded(book)} 
-                 className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
-              </section>
+              <Link to={`/bookDetails/${_id}`} className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</Link>
+              <button
+              onClick={()=>handleAddBook(book)} 
+               className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+              <button
+              onClick={()=> handleAddReaded(book)} 
+               className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
+            </section>
+             }
               
               </div>
               
