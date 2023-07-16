@@ -42,7 +42,8 @@ const AddBook = () => {
         dispatch(setNotification({ message: 'Successfully added books', type: 'success' }));
         reset()
       })
-      .catch((error) => {
+      .catch((error:any) => {
+        console.log(error);
         Swal.fire('Error', 'Failed to add book', 'error');
         dispatch(setNotification({ message: 'Failed to add book', type: 'error' }));
       });

@@ -7,49 +7,51 @@ import Login from "../components/Login";
 import AddBook from "../components/AddBook";
 import BookDetail from "../components/BookDetail";
 import ALlBook from "../components/AllBook";
-
 import UpdateBook from "../components/UpdateBook";
 import PrivateRoutes from "./PrivateRoutes";
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <App />, 
+    element: <App />,
     children: [
       {
-        path:"/",
+        path: "/",
         element: <Home />,
       },
       {
-        path:"/signup",
+        path: "/signup",
         element: <SignUp />,
       },
       {
-        path:"/login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path:"/addBook",
-        element: <PrivateRoutes><AddBook/></PrivateRoutes>,
-      },
-      {
-        path:"/allBook",
+        path: "/addBook",
         element: 
-          <ALlBook/>        
+          <PrivateRoutes>
+            <AddBook />
+          </PrivateRoutes>
+        
       },
       {
-        path:"/bookDetails/:id",
-        element: <BookDetail></BookDetail>
+        path: "/allBook",
+        element: <ALlBook />,
       },
       {
-        path:"/bookUpdate/:id",
-        element: <UpdateBook/>
+        path: "/bookDetails/:id",
+        element: <BookDetail></BookDetail>,
+      },
+      {
+        path: "/bookUpdate/:id",
+        element: <UpdateBook />,
       },
     ],
   },
   {
     path: "*",
-    element: <NotFound />, 
+    element: <NotFound />,
   },
 ]);
 

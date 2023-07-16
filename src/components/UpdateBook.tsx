@@ -6,9 +6,17 @@ import {
 } from "../redux/features/book/bookAPi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useForm } from "react-hook-form";
-import { IBook } from "./Books";
+
 import Swal from "sweetalert2";
 import { setNotification } from "../redux/notification/notificationSLice";
+
+export interface IBook {
+  _id?:string | any
+  title?: string;
+  author?: string;
+  genre?: string;
+  publicationDate?: string;
+}
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -20,7 +28,7 @@ const UpdateBook = () => {
     refetchOnMountOrArgChange: true,
   });
   const book = bookDatas?.data;
-  // console.log("start", book, "book close");
+  console.log("start", book, "book close");
 
   const [UpdateBook, { isLoading, isError, isSuccess }] =
     useUpdateBookMutation();
@@ -39,7 +47,7 @@ const UpdateBook = () => {
       // console.log(data);
       console.log(user?.email, book?.user);
 
-      UpdateBook(data)
+      UpdateBook({data,id})
         .unwrap()
         .then(() => {
           Swal.fire("Update Book", "Successfully updated books", "success");

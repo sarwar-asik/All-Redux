@@ -8,7 +8,7 @@ import {
 } from "../redux/features/book/bookAPi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import Swal from "sweetalert2";
-import { useState, ChangeEvent, FormEvent, } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { setNotification } from "../redux/notification/notificationSLice";
 
 const BookDetail = () => {
@@ -23,6 +23,7 @@ const BookDetail = () => {
   const [deleteBook, { isSuccess }] = useDeleteBookMutation();
   const navigate = useNavigate();
 
+  //! for delete Book
   const handleDeleteBook = async (id: string | undefined) => {
     console.log(user?.email, book?.user);
     try {
@@ -41,10 +42,10 @@ const BookDetail = () => {
   }
 
   //! for Review Section
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState<string>("");
-  const [postComment, { isLoading, isError,error }] = usePostReviewMutation();
-  console.log(isLoading, isError,error);
+  const [postComment, { isLoading, isError, error }] = usePostReviewMutation();
+  console.log(isLoading, isError, error);
   const { data: commentData } = useGetReviewQuery(id, {
     refetchOnMountOrArgChange: true,
     // pollingInterval: 2000,
@@ -57,31 +58,33 @@ const BookDetail = () => {
     // const form =  event.target;
     console.log(inputValue);
 
-   const option ={
-    id:id,
-    data:{review:inputValue}
-   }
+    const option = {
+      id: id,
+      data: { review: inputValue },
+    };
 
-   console.log(option,"review");
+    console.log(option, "review");
 
-   postComment(option)
-   .unwrap()
+    postComment(option)
+      .unwrap()
       .then(() => {
-        Swal.fire('Added review', 'Successfully added reviews', 'success');
-        dispatch(setNotification({ message: 'Successfully added reviews', type: 'success' }));
-        setInputValue("")
-        
+        Swal.fire("Added review", "Successfully added reviews", "success");
+        dispatch(
+          setNotification({
+            message: "Successfully added reviews",
+            type: "success",
+          })
+        );
+        setInputValue("");
       })
-      .catch((error) => {
-        Swal.fire('Error', 'Failed to add review', 'error');
-        dispatch(setNotification({ message: 'Failed to add review', type: 'error' }));
+      .catch((error: any) => {
+        console.log(error);
+        Swal.fire("Error", "Failed to add review", "error");
+        dispatch(
+          setNotification({ message: "Failed to add review", type: "error" })
+        );
       });
-
- 
-
   };
-
-  
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(event.target.value);
@@ -89,10 +92,12 @@ const BookDetail = () => {
 
   return (
     <div>
+      {/* //! Book Detail Section */}
+      
       <section className="max-w-md mx-auto mt-8 p-8 bg-white shadow-md rounded-lg ">
         <h2 className="text-2xl font-bold mb-4">{book?.title}</h2>
         <p className="text-gray-600 mb-4">
-          <span className="font-semibold">Author:</span> {book?.author}
+          <span className="font-semibold">Author:</span>Author : {book?.author}
         </p>
         <p className="text-gray-600 mb-4">
           <span className="font-semibold">Genre:</span> {book?.genre}
@@ -102,54 +107,53 @@ const BookDetail = () => {
           {book?.publicationDate}
         </p>
 
-        <section className="flex justify-around font-medium ">
-          <Link
-            to={`/bookUpdate/${id}`}
-            className="shadow hover:shadow-2xl p-2  text-blue-500"
-          >
-            Update Book
-          </Link>
-          <button
-            onClick={() => handleDeleteBook(id)}
-            className="shadow hover:shadow-2xl p-2 text-red-500 "
-          >
-            Delete Book
-          </button>
-        </section>
+        {user?.email && (
+          <section className="flex justify-around font-medium ">
+            <Link
+              to={`/bookUpdate/${id}`}
+              className="shadow hover:shadow-2xl p-2  text-blue-500"
+            >
+              Edit Book
+            </Link>
+            <button
+              onClick={() => handleDeleteBook(id)}
+              className="shadow hover:shadow-2xl p-2 text-red-500 "
+            >
+              Delete Book
+            </button>
+          </section>
+        )}
       </section>
-
+      {/* //! Review Section /// */}
       <section className="max-w-md mx-auto mt-8 p-8 bg-white shadow-md rounded-lg my-7">
-      <h2 className="text-md font-bold mb-4">Add Review</h2>
-       
-      <form className="flex gap-5 items-center justify-around" onSubmit={handleSubmit}>
-        <textarea
-          className="min-h-[50px] bg-slate-700 outline-none rounded-xl  py-2 text-center font-mono text-slate-100 tex-2xl"
-          onChange={handleChange}
-          value={inputValue}
-        />
-        <button
-          type="submit"
-          className="border border-gray-300 rounded py-2 px-4 mr-2"
+        <h2 className="text-md font-bold mb-4">Add Review</h2>
+
+        <form
+          className="flex gap-5 items-center justify-around"
+          onSubmit={handleSubmit}
         >
-         Add Review
-        </button>
-      </form>
+          <textarea
+            className="min-h-[50px] bg-slate-700 outline-none rounded-xl  py-2 text-center font-mono text-slate-100 tex-2xl"
+            onChange={handleChange}
+            value={inputValue}
+          />
+          <button
+            type="submit"
+            className="border border-gray-300 rounded py-2 px-4 mr-2"
+          >
+            Add Review
+          </button>
+        </form>
 
-      <h3 className='mt-7 font-bold text-xl '>Users Comments ::</h3>
-      <div className="mt-6">
-        {commentData?.data?.reviews?.map((comment: string, index: number) => (
-          <div  key={index} className="flex gap-3 items-center mb-5">
-            <p>{comment}</p>
-          </div>
-        ))}
-      </div>
-
-
+        <h3 className="mt-7 font-bold text-xl ">Users Comments ::</h3>
+        <div className="mt-6">
+          {commentData?.data?.reviews?.map((comment: string, index: number) => (
+            <div key={index} className="flex gap-3 items-center mb-5">
+              <p>{comment}</p>
+            </div>
+          ))}
+        </div>
       </section>
-
-
-
-
     </div>
   );
 };

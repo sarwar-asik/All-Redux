@@ -38,10 +38,13 @@ const ALlBook = () => {
   const filteredBooks = books?.filter((book) => {
     const { title, author, genre } = book;
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    const bookDate = new Date(book?.publicationDate);
+    const formattedDate = bookDate.toISOString().split('T')[0];
     return (
       title.toLowerCase().includes(lowerCaseSearchTerm) ||
       author.toLowerCase().includes(lowerCaseSearchTerm) ||
-      genre.toLowerCase().includes(lowerCaseSearchTerm)
+      genre.toLowerCase().includes(lowerCaseSearchTerm)||
+      formattedDate.includes(lowerCaseSearchTerm)
     );
   });
 
@@ -82,8 +85,8 @@ const ALlBook = () => {
               <div className="w-full  px-4">
                 <div className="bg-white shadow-md rounded-lg p-6">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
-                  <p className="text-gray-600 mb-4">{author}</p>
-                  <p className="text-gray-600">{genre}</p>
+                  <p className="text-gray-600 mb-4">Author {author}</p>
+                  <p className="text-gray-600">Genre:: {genre}</p>
                   <p className="text-gray-600">
                     Publication Date: {publicationDate}
                   </p>
