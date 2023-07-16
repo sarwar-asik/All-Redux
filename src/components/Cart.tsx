@@ -25,7 +25,7 @@ const Cart = () => {
   }
   const handleRemoveBook =(book:IBook) =>{
     dispatch(removeFromWishlist(book))
-    Swal.fire('Added Book', 'Successfully added books', 'success'); 
+    Swal.fire('Removed Book', 'Successfully added books', 'success'); 
   }
   const handleRemoveOne =(book:IBook)=>{
     dispatch(removeOne(book))
