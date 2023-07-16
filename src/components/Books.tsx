@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useGetBookQuery } from '../redux/features/book/bookAPi';
 import { useAppDispatch } from '../redux/hooks';
 import { addToWishlist } from '../redux/features/whislist/whislistSlice';
+import { addToReaded } from '../redux/features/readedBook/readedBookSlice';
+import Swal from 'sweetalert2';
 
 
  interface IBook {
@@ -38,6 +40,11 @@ const Books = () => {
 
     const handleAddBook = (BookData: IBook ) => {
       dispatch(addToWishlist(BookData))
+      Swal.fire('Added WishList', 'Successfully added books', 'success');
+    };
+    const handleAddReaded = (BookData: IBook ) => {
+      dispatch(addToReaded(BookData))
+      Swal.fire('Added Readed', 'Successfully added books', 'success');
     };
   
     return (
@@ -59,8 +66,8 @@ const Books = () => {
           {books?.map((book, i) => {
             const {_id,title,author,genre, publicationDate} = book
             return (
-              <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-3  ">
-              <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-2 shadow-md">
+              <div key={i+1} className="flex flex-wrap -mx-4 shadow-md hover:shadow-2xl hover:scale-105 py-1 ">
+              <Link to={`/bookDetails/${_id}`} className="w-full  px-4 my-1 shadow-md">
                 <div className="bg-white ">
                   <h2 className="text-lg font-bold mb-2">{title}</h2>
                   <p className="text-gray-600 mb-4">{author}</p>
@@ -70,10 +77,13 @@ const Books = () => {
                 </div>
               </Link>
               <section className='w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium'>
-                <button className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</button>
+                <Link to={`/bookDetails/${_id}`} className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Go Details</Link>
                 <button
                 onClick={()=>handleAddBook(book)} 
-                 className='py-2 bg-slate-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+                 className='py-2 bg-green-300 rounded-sm my-2 px-1'>Add Wishlist</button>
+                <button
+                onClick={()=> handleAddReaded(book)} 
+                 className='py-2 bg-blue-300 rounded-sm my-2 px-1 '>Add Readed</button>
               </section>
               
               </div>

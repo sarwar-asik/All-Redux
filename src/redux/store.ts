@@ -5,14 +5,15 @@ import userSLice from "./features/users/userSLice";
 import { api } from "./api/apiSLice";
 import notificationSLice from "./notification/notificationSLice";
 import WishlistSlice from "./features/whislist/whislistSlice";
-
+import readedBookSlice from "./features/readedBook/readedBookSlice";
 
 
 const store = configureStore({
   reducer: {
     user:userSLice,
     notification:notificationSLice,
-    wishlist:WishlistSlice
+    wishlist:WishlistSlice,
+    readBook:readedBookSlice
     ,
     [api.reducerPath]:api.reducer
   },

@@ -10,6 +10,9 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import Swal from "sweetalert2";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { setNotification } from "../redux/notification/notificationSLice";
+import { IBook } from "./AllBook";
+import { addToWishlist } from "../redux/features/whislist/whislistSlice";
+import { addToReaded } from "../redux/features/readedBook/readedBookSlice";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -90,6 +93,20 @@ const BookDetail = () => {
     setInputValue(event.target.value);
   };
 
+
+
+
+
+
+  const handleAddBook = (BookData: IBook) => {
+    dispatch(addToWishlist(BookData))
+    Swal.fire('Added WishList', 'Successfully added books', 'success');
+  };
+  const handleAddReaded = (BookData: IBook ) => {
+    dispatch(addToReaded(BookData))
+    Swal.fire('Added Readed', 'Successfully added books', 'success');
+  };
+
   return (
     <div>
       {/* //! Book Detail Section */}
@@ -124,6 +141,21 @@ const BookDetail = () => {
           </section>
         )}
       </section>
+      <section className="w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-medium">
+               
+                  <button
+                    onClick={() => handleAddBook(book)}
+                    className="py-2 bg-green-300 rounded-sm my-2 px-1"
+                  >
+                    Add Wishlist
+                  </button>
+                  <button
+                    onClick={() => handleAddReaded(book)}
+                    className="py-2 bg-blue-300 rounded-sm my-2 px-1 "
+                  >
+                    Add Readed
+                  </button>
+                </section>
       {/* //! Review Section /// */}
       <section className="max-w-md mx-auto mt-8 p-8 bg-white shadow-md rounded-lg my-7">
         <h2 className="text-md font-bold mb-4">Add Review</h2>
