@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Link} from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { createUser } from "../redux/features/users/userSLice";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { useEffect } from "react";
+import { setNotification } from "../redux/notification/notificationSLice";
 
 interface ISignupFormData {
   name: string;
@@ -13,9 +14,8 @@ interface ISignupFormData {
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
-  const { error, isError, user } = useAppSelector(
-    (state) => state.user
-  );
+  const navigate =useNavigate()
+  const { error, isError, user } = useAppSelector((state) => state.user);
   console.log("🚀 ~ file: SignUp.tsx:18 ~ SignUp ~ user:", user);
 
   const {
@@ -33,9 +33,19 @@ const SignUp = () => {
 
   const onSubmit = (data: ISignupFormData) => {
     const { name, email, password } = data;
-    console.log("🚀 ~ file: SignUp.tsx:22 ~ onSubmit ~ data:", data,name);
+    console.log("🚀 ~ file: SignUp.tsx:22 ~ onSubmit ~ data:", data, name);
     dispatch(createUser({ email, password }))
-    toast("successFully SIgn Up");
+    .unwrap()
+      .then(() => {
+        Swal.fire('SignUp ', 'Successfully SignUp ', 'success');
+        dispatch(setNotification({ message: 'Successfully SignUp ', type: 'success' }));
+        navigate('/')
+      })
+      .catch((error:any) => {
+        console.log(error);
+        Swal.fire('Error', 'Failed to SignUp', 'error');
+        dispatch(setNotification({ message: 'Failed SignUp', type: 'error' }));
+      });
   };
   const passwordInput = document.getElementById("password") as HTMLInputElement;
 

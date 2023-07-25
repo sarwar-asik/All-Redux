@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link,useNavigate, } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { loginUser } from "../redux/features/users/userSLice";
-import { toast } from "react-toastify";
+
+import Swal from "sweetalert2";
+import { setNotification } from "../redux/notification/notificationSLice";
 interface ILoginFormData {
   name: string;
   email: string;
@@ -12,6 +14,7 @@ interface ILoginFormData {
 const Login = () => {
 
   const dispatch = useAppDispatch()
+  const navigate =useNavigate()
 
   const {
     register,
@@ -23,7 +26,19 @@ const Login = () => {
     console.log(data);
     const {email,password} = data
     dispatch(loginUser({email,password}))
-    toast("successFully Login")
+    .unwrap()
+      .then(() => {
+        Swal.fire('Login Book', 'Successfully Login ', 'success');
+        dispatch(setNotification({ message: 'Successfully Login ', type: 'success' }));
+        navigate('/')
+        
+      })
+      .catch((error:any) => {
+        console.log(error);
+        Swal.fire('Error', 'Failed to Login', 'error');
+        dispatch(setNotification({ message: 'Failed Login', type: 'error' }));
+      });
+
   };
 
   return (

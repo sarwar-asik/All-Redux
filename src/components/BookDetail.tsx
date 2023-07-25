@@ -124,6 +124,12 @@ const BookDetail = () => {
         {user?.email && (
           <section className="flex justify-around font-medium ">
             <Link
+              to={`/addBook`}
+              className="shadow hover:shadow-2xl p-2  text-blue-500"
+            >
+              Add a Book
+            </Link>
+            <Link
               to={`/bookUpdate/${id}`}
               className="shadow hover:shadow-2xl p-2  text-blue-500"
             >
