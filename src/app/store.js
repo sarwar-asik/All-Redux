@@ -4,6 +4,7 @@ import filterSlice from "../feature/filter/filterSlice";
 import logger from "redux-logger";
 import productSlice from "../feature/products/productSlice";
 import { productApi } from "../feature/api/apiSlice";
+
 const store = configureStore({
   reducer: {
     [productApi.reducerPath]:productApi.reducer,
