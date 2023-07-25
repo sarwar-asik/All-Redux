@@ -5,11 +5,11 @@ import { api } from './api/apiSlice';
 import userReducer from './features/user/userSlice';
 
 const store = configureStore({
-  reducer:{
+  reducer: {
     cart: cartReducers,
     product: productReducers,
-    user:userReducer,
-    [api.reducerPath]: api.reducer
+    user: userReducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),

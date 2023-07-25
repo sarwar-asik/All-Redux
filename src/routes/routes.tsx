@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
-import Login from '@/pages/Login';
+
 import NotFound from '@/pages/NotFound';
 import Home from '@/pages/Home';
 import Products from '@/pages/Products';
@@ -8,6 +8,7 @@ import Checkout from '@/pages/Checkout';
 
 import ProductDetails from '@/pages/ProductDetails';
 import { SignUpForm } from '@/components/SignUpForm';
+import { LoginForm } from '@/components/LoginForm';
 
 
 const routes = createBrowserRouter([
@@ -31,16 +32,17 @@ const routes = createBrowserRouter([
         path: '/checkout',
         element: <Checkout />,
       },
+      {
+        path: '/login',
+        element: <LoginForm />,
+      },
+      {
+        path: '/signup',
+        element: <SignUpForm />,
+      },
     ],
   },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/signup',
-    element: <SignUpForm />,
-  },
+ 
   {
     path: '*',
     element: <NotFound />,

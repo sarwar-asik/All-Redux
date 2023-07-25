@@ -1,6 +1,5 @@
-import { IProduct } from '@/types/globalTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { PayloadAction } from '@reduxjs/toolkit';
+
 
 interface IProducts {
   status:boolean,
@@ -21,10 +20,7 @@ const productSlice = createSlice({
     },
     setPriceRange:(state,action:PayloadAction<number>)=>{
         state.priceRange = action.payload
-
     }
-
-
     }
 })
 

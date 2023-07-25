@@ -9,9 +9,6 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface LoginFormInputs {
@@ -26,17 +23,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-
-
-  const navigate = useNavigate();
-
   const onSubmit = (data: LoginFormInputs) => {
     console.log(data);
-
-    // dispatch(loginUser({ email: data.email, password: data.password }));
   };
-
-
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>

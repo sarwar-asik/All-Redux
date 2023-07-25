@@ -25,7 +25,7 @@ export default function ProductReview({ id }: IProps) {
 
   //! started redux for RTK post
 
-  const [postComment,{isLoading,isError,isSuccess}] = usePostCommentMutation()
+  const [postComment,{isLoading,isError,isSuccess,}] = usePostCommentMutation()
 
   console.log("🚀 ~ file: ProductReview.tsx:28 ~ ProductReview ~ isSuccess:", isSuccess)
   console.log("🚀 ~ file: ProductReview.tsx:28 ~ ProductReview ~ isError:", isError)
